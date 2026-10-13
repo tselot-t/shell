@@ -23,27 +23,36 @@ touch analysis/main.py
 # download client data
 curl -Lo rawdata.zip https://github.com/UofT-DSI/shell/raw/refs/heads/main/02_activities/assignments/rawdata.zip
 unzip -q rawdata.zip
-
 ###########################################
 # Complete assignment here
 
 # 1. Create a directory named data
-
+mkdir data
+#creates data folder in assigments folder
 # 2. Move the ./rawdata directory to ./data/raw (eg. move it into ./data and rename it to raw)
-
+mv rawdata ./data/raw
+#moves rawdata directory to data directory and renames it raw
 # 3. List the contents of the ./data/raw directory
-
+ls ./data/raw
 # 4. Create the directory ./data/processed, 
 #    then create the following sub-directories within it: server_logs, user_logs, and event_logs
-
+cd ./newproject
+mkdir -p ./data/processed/{server_logs,user_logs,event_logs}
+#goes back to data directory then creates new directory processed with parellel subdirectories
 # 5. Copy all server log files (files with "server" in the name AND a .log extension) from ./data/raw to ./data/processed/server_logs
-
+cd ./data
+cp ./raw/*server*.log ./processed/server_logs
+#copies files in raw folder with the term "server" in the name and .log extension into the new server_logs directory
 # 6. Repeat the above step for user logs and event logs
-
+cp ./raw/*user*.log ./processed/user_logs
+cp ./raw/*event*.log ./processed/event_logs
+#repeats the command for the user_logs and event_logs
 # 7. For user privacy, remove all files containing IP addresses (files with "ipaddr" in the filename) from ./data/raw and ./data/processed/user_logs
-
+rm ./raw/*ipaddr* ./processed/user_logs/*ipaddr* 
+#removes files with "ipaddr" in filename from raw folder and user_logs folder
 # 8. Create a file named ./data/inventory.txt that lists all the files in the subfolders of ./data/processed
-
+ls -R ./processed > ./inventory.txt
+#creates a new file called "inventory.txt" with the list of files in the processed folder
 
 ###########################################
 
